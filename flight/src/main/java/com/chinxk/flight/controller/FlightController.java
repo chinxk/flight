@@ -9,6 +9,7 @@ import com.chinxk.flight.bean.InterMessageBean;
 import com.chinxk.flight.service.InterReturnService;
 
 @Controller
+@RequestMapping("/flight")
 public class FlightController {
 
 	@Autowired
@@ -25,5 +26,15 @@ public class FlightController {
 		model.addAttribute("bean", bean);
 		
 		return "list";
+	}
+	
+	@RequestMapping("/init")
+	public String init(Model model) {
+		return "init";
+	}
+	
+	@RequestMapping("/add")
+	public String add(Model model) {
+		return "add";
 	}
 }

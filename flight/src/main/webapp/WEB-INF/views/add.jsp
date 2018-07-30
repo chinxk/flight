@@ -15,7 +15,7 @@
 				 
 				<h4>
 					检索一览!
-				</h4> <strong>进行中的检索。</strong>
+				</h4> <strong>进行中的检索。</strong> 点击进入明细
 			</div>
 			<table class="table table-striped table-condensed" style='table-layout:fixed;'>
 				<thead>
@@ -38,6 +38,9 @@
 						<th>
 							当前价格
 						</th>
+						<th>
+							状态
+						</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -49,16 +52,19 @@
 							新加坡
 						</td>
 						<td >
-							01/04
+							01/04/2012
 						</td>
 						<td>
-							01/04
+							01/04/2012
 						</td>
 						<td >
 							2000
 						</td>
 						<td >
 							2500
+						</td>
+						<td >
+							Rain
 						</td>
 					</tr>
 					<tr class="success">
@@ -69,16 +75,19 @@
 							新加坡
 						</td>
 						<td>
-							01/04
+							01/04/2012
 						</td>
 						<td>
-							01/04
+							01/04/2012
 						</td>
 						<td>
 							2000
 						</td>
 						<td>
 							2500
+						</td>
+						<td>
+							Rain
 						</td>
 					</tr>
 					<tr class="error">
@@ -89,16 +98,19 @@
 							新加坡
 						</td>
 						<td>
-							01/04
+							01/04/2012
 						</td>
 						<td>
-							01/04
+							01/04/2012
 						</td>
 						<td>
 							2000
 						</td>
 						<td>
 							2500
+						</td>
+						<td>
+							Rain
 						</td>
 					</tr>
 					<tr class="warning">
@@ -109,16 +121,19 @@
 							新加坡
 						</td>
 						<td>
-							01/04
+							01/04/2012
 						</td>
 						<td>
-							01/04
+							01/04/2012
 						</td>
 						<td>
 							2000
 						</td>
 						<td>
 							2500
+						</td>
+						<td>
+							Rain
 						</td>
 					</tr>
 					<tr class="info">
@@ -129,10 +144,10 @@
 							新加坡
 						</td>
 						<td>
-							01/04
+							01/04/2012
 						</td>
 						<td>
-							01/04
+							01/04/2012
 						</td>
 						<td>
 							2000
@@ -140,30 +155,32 @@
 						<td>
 							2500
 						</td>
+						<td>
+							Rain
+						</td>
 					</tr>
 				</tbody>
-			</table> 
-			<p>
-				<button class="btn btn-primary btn-default" type="button">Add</button>
-			</p>
+			</table> <button class="btn btn-primary btn-default" type="button">Add</button>
+			<span/>
+			<br/>
 			<div class="panel-group" id="panel-744285">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						 <a class="panel-title collapsed" href="#panel-element-698385" data-toggle="collapse" data-parent="#panel-744285">关于检索明细及删除...</a>
+						 <a class="panel-title collapsed" href="#panel-element-698385" data-toggle="collapse" data-parent="#panel-744285">About your mail address...</a>
 					</div>
 					<div class="panel-collapse collapse" id="panel-element-698385">
 						<div class="panel-body">
-							点击各行可以进入明细，在明细页面可以删除该检索。创建超过三个月的检索将自动删除。
+							It will be used to recieve reminder mail, and as a Id to identify you.
 						</div>
 					</div>
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						 <a class="panel-title collapsed" href="#panel-element-727733" data-toggle="collapse" data-parent="#panel-744285">关于状态...</a>
+						 <a class="panel-title collapsed" href="#panel-element-727733" data-toggle="collapse" data-parent="#panel-744285">If you can't recieve our mail...</a>
 					</div>
 					<div class="panel-collapse collapse" id="panel-element-727733">
 						<div class="panel-body">
-							各网站价格均未失效为晴，1个失效为多云，2个失效为阴，2个以上失效为雷雨。
+							Add the sender ' chinxk@hotmail.com' to your white-list.
 						</div>
 					</div>
 				</div>
