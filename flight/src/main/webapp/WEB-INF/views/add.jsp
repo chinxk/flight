@@ -5,6 +5,7 @@
    <link href="//libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
    <script src="//libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
    <script src="//libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+   <script src="//cdn.bootcss.com/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
 </head>
 <body>
 
@@ -32,7 +33,7 @@
 					</div>
 					<div id="panel-element-36963" class="panel-collapse collapse in">
 						<div class="panel-body">
-							<input type="text" class="form-control" id="fromCity" placeholder="出发城市" onChange="onInputChange()">
+							<input type="text" class="form-control" data-provide="typeahead" id="fromCity" placeholder="出发城市" onChange="onInputChange()">
 							<br/>
 							<input type="text" class="form-control" id="toCity" placeholder="到达城市" onChange="onInputChange()">
 						</div>
@@ -83,6 +84,10 @@
 </div>
 </body>
 <script>
+	var subjects = ['长沙,CSX,黄花机场','成都,CTU,双流机场','常州,CZX,奔牛机场'];
+    $('#fromCity').typeahead({source: subjects});
+	$('#toCity').typeahead({source: subjects});
+	
 	function onInputChange(){
 		var s = 0;
 		var i = 0;
