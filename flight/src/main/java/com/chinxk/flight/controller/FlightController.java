@@ -35,6 +35,9 @@ public class FlightController {
 	
 	@RequestMapping("/add")
 	public String add(Model model) {
+		//String[] airportData = interReturnServiceImpl.loadAirports();
+		String[] airportData = {"长沙,CSX,黄花机场","成都,CTU,双流机场"};
+		model.addAttribute("airportData", airportData);
 		return "add";
 	}
 }

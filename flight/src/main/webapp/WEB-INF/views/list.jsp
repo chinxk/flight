@@ -43,19 +43,19 @@
 				<tbody>
 					<tr>
 						<td >
-							成都
+							${bean.fromCityName}
 						</td>
 						<td >
-							新加坡
+							${bean.toCityName}
 						</td>
 						<td >
-							01/04
+							${bean.startDate}
 						</td>
 						<td>
-							01/04
+							${bean.endDate}
 						</td>
 						<td >
-							2000
+							${bean.targetPrice}
 						</td>
 						<td >
 							2500

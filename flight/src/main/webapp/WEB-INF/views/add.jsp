@@ -33,9 +33,9 @@
 					</div>
 					<div id="panel-element-36963" class="panel-collapse collapse in">
 						<div class="panel-body">
-							<input type="text" class="form-control" data-provide="typeahead" id="fromCity" placeholder="出发城市" onChange="onInputChange()">
+							<input type="text" class="form-control" data-provide="typeahead" id="fromCity" placeholder="出发城市" onChange="onInputChange()"/>
 							<br/>
-							<input type="text" class="form-control" id="toCity" placeholder="到达城市" onChange="onInputChange()">
+							<input type="text" class="form-control" id="toCity" placeholder="到达城市" onChange="onInputChange()"/>
 						</div>
 					</div>
 				</div>
@@ -45,9 +45,9 @@
 					</div>
 					<div id="panel-element-969561" class="panel-collapse collapse">
 						<div class="panel-body">
-							<input type="text" class="form-control" id="fromCity" placeholder="出发日期" onChange="onInputChange()">
+							<input type="text" class="form-control" id="fromCity" placeholder="出发日期" onChange="onInputChange()"/>
 							<br/>
-							<input type="text" class="form-control" id="toCity" placeholder="返回日期" onChange="onInputChange()">
+							<input type="text" class="form-control" id="toCity" placeholder="返回日期" onChange="onInputChange()"/>
 						</div>
 					</div>
 				</div>
@@ -84,9 +84,12 @@
 </div>
 </body>
 <script>
-	var subjects = ['长沙,CSX,黄花机场','成都,CTU,双流机场','常州,CZX,奔牛机场'];
-    $('#fromCity').typeahead({source: subjects});
-	$('#toCity').typeahead({source: subjects});
+	$(document).ready(function(){
+		//var subjects = ['长沙,CSX,黄花机场','成都,CTU,双流机场','常州,CZX,奔牛机场'];
+		var subjects = [];
+	    $('#fromCity').typeahead({source: airportData});
+		$('#toCity').typeahead({source: airportData});
+	});
 	
 	function onInputChange(){
 		var s = 0;
