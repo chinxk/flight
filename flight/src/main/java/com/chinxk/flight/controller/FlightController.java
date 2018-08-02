@@ -9,7 +9,6 @@ import com.chinxk.flight.bean.InterMessageBean;
 import com.chinxk.flight.service.InterReturnService;
 
 @Controller
-@RequestMapping("/flight")
 public class FlightController {
 
 	@Autowired

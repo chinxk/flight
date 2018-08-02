@@ -1,11 +1,15 @@
 ﻿<!DOCTYPE html>
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
 <html>
 <head>
    <title>Flight</title>
    <link href="//libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+   <link href="https://cdn.bootcss.com/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" rel="stylesheet">
    <script src="//libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
    <script src="//libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
    <script src="//cdn.bootcss.com/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+   <script src="https://cdn.bootcss.com/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+   <script src="https://cdn.bootcss.com/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.zh-CN.min.js"></script>
 </head>
 <body>
 
@@ -45,9 +49,11 @@
 					</div>
 					<div id="panel-element-969561" class="panel-collapse collapse">
 						<div class="panel-body">
-							<input type="text" class="form-control" id="fromCity" placeholder="出发日期" onChange="onInputChange()"/>
-							<br/>
-							<input type="text" class="form-control" id="toCity" placeholder="返回日期" onChange="onInputChange()"/>
+							<div class="input-daterange input-group" id="datepicker">
+							    <input type="text" class="input-sm form-control" name="start" id="fromCity" placeholder="出发日期" onChange="onInputChange()"/>
+							    <br/>
+							    <input type="text" class="input-sm form-control" name="end" id="toCity" placeholder="返回日期" onChange="onInputChange()"/>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -84,11 +90,17 @@
 </div>
 </body>
 <script>
+<%@ include file="airport_script.jsp" %>
 	$(document).ready(function(){
 		//var subjects = ['长沙,CSX,黄花机场','成都,CTU,双流机场','常州,CZX,奔牛机场'];
-		var subjects = [];
-	    $('#fromCity').typeahead({source: airportData});
-		$('#toCity').typeahead({source: airportData});
+		//var subjects = [];
+	    $('#fromCity').typeahead({source: subjects });
+		$('#toCity').typeahead({source: subjects });
+		
+		$('.input-daterange').datepicker({
+		    format: "yyyy-mm-dd",
+		    language: "zh-CN"
+		});
 	});
 	
 	function onInputChange(){
