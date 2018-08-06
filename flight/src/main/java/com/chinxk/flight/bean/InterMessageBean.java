@@ -1,5 +1,8 @@
 package com.chinxk.flight.bean;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 public class InterMessageBean {
 
 	// id
@@ -153,4 +156,31 @@ public class InterMessageBean {
 		this.status = status;
 	}
 
+	@Override
+	public String toString() {
+		String rStr = "";
+		for(Method m : this.getClass().getMethods()) {
+			String methodName =m.getName();
+			if(methodName.startsWith("get")&&!methodName.contains("Class")) {
+				StringBuilder stringBuilder = new StringBuilder();
+				stringBuilder.append(methodName.replaceFirst("get", ""));
+				stringBuilder.append(":");
+				try {
+					stringBuilder.append(m.invoke(this, null));
+					stringBuilder.append(",");
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				rStr += (stringBuilder.toString());
+			}
+		}
+		return rStr;
+	}
 }
