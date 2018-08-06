@@ -15,7 +15,7 @@
 				 <button class="close" aria-hidden="true" type="button" data-dismiss="alert">×</button>
 				<h2>
 					Welcom!
-				</h2> <info id='infoArea'></info>
+				</h2> <h2 id='infoArea'></h2>
 			</div>
 			<div class="jumbotron">
 				<h3>
@@ -59,7 +59,8 @@
 function okBtnClick(){
 		var mail = $("#iptEmailId").val();
 			if(validMail(mail)){
-				//to next
+				var uri = "/flight/login?mailAddress="+mail;
+				window.location.href = uri;
 			}else{
 				$("#infoArea").text("It's not a valid email :"+mail);
 			}
@@ -75,4 +76,4 @@ function validMail(mail){
 　　}
 }
 </script>
-</html
+</html>

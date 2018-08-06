@@ -1,6 +1,8 @@
 ﻿<!DOCTYPE html>
-<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
 <head>
    <title>Flight</title>
    <link href="//libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
@@ -41,26 +43,16 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td >
-							${bean.fromCityName}
-						</td>
-						<td >
-							${bean.toCityName}
-						</td>
-						<td >
-							${bean.startDate}
-						</td>
-						<td>
-							${bean.endDate}
-						</td>
-						<td >
-							${bean.targetPrice}
-						</td>
-						<td >
-							2500
-						</td>
-					</tr>
+					<c:forEach items="${list}" var="item" varStatus="id">
+						<tr>
+     						<td >${item.fromCityName}</td>
+     						<td >${item.toCityName}</td>
+     						<td >${item.startDate}</td>
+     						<td >${item.endDate}</td>
+     						<td >${item.targetPrice}</td>
+     						<td >${item.status}</td>
+						</tr>
+     				</c:forEach>
 					<tr class="success">
 						<td>
 							成都
@@ -144,7 +136,7 @@
 				</tbody>
 			</table> 
 			<p>
-				<button class="btn btn-primary btn-default" type="button">Add</button>
+				<button class="btn btn-primary btn-default" type="button" onClick="toAdd()">Add</button>
 			</p>
 			<div class="panel-group" id="panel-744285">
 				<div class="panel panel-default">
@@ -171,5 +163,11 @@
 		</div>
 	</div>
 </div>
+<script>
+	function toAdd() {
+		var uri = "/flight/add";
+		window.location.href = uri;
+	}
+</script>
 </body>
 </html>
