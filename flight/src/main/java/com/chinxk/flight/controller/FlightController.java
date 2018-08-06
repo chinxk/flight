@@ -88,10 +88,10 @@ public class FlightController {
 		Date dt=new Date();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         
-        bean.setQunarPrice(MAX_PRICE);
-        bean.setCtripPrice(MAX_PRICE);
-        bean.setFliggyPrice(MAX_PRICE);
-        bean.setSkyPrice(MAX_PRICE);
+//        bean.setQunarPrice(MAX_PRICE);
+//        bean.setCtripPrice(MAX_PRICE);
+//        bean.setFliggyPrice(MAX_PRICE);
+//        bean.setSkyPrice(MAX_PRICE);
        
 		bean.setCreateDate(df.format(dt));
 		bean.setStatus(1);
