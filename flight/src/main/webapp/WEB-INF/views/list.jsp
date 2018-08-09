@@ -10,7 +10,7 @@
    <script src="//libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div class="container">
+	<div class="container" style="max-width:600px;min-width:200px">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
 			<div class="alert alert-dismissable alert-info">

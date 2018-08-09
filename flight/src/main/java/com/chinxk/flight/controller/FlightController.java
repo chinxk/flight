@@ -23,7 +23,6 @@ import io.netty.util.internal.StringUtil;
 @Controller
 public class FlightController {
 
-	private static final int MAX_PRICE = 99999;
 	@Autowired
 	InterReturnService interReturnServiceImpl;
 
@@ -35,12 +34,12 @@ public class FlightController {
 		
 		System.out.println(session.getAttribute("uid"));
 		
-		String testMsg = "Id:id" + ",ToCityName:新加坡" + ",ToCityCode:SIN" + ",FromCityName:成都" + ",FromCityCode:CTU"
-				+ ",StartDate:2018-12-15" + ",EndDate:2018-12-19" + ",MailAdd:107214108@qq.com" + ",TargetPrice:2000"
-				+ ",QunarPrice:99" + ",FliggyPrice:98" + ",CtripPrice:97" + ",SkyPrice:96" + ",CreateDate:2018-07-27"
-				+ ",Status:1";
+//		String testMsg = "Id:id" + ",ToCityName:新加坡" + ",ToCityCode:SIN" + ",FromCityName:成都" + ",FromCityCode:CTU"
+//				+ ",StartDate:2018-12-15" + ",EndDate:2018-12-19" + ",MailAdd:107214108@qq.com" + ",TargetPrice:2000"
+//				+ ",QunarPrice:99" + ",FliggyPrice:98" + ",CtripPrice:97" + ",SkyPrice:96" + ",CreateDate:2018-07-27"
+//				+ ",Status:1";
 
-		testMsg = (String)session.getAttribute("testMsg");
+		String testMsg = (String)session.getAttribute("testMsg");
 		InterMessageBean bean = interReturnServiceImpl.convertFromStr(testMsg);
 		ArrayList<InterMessageBean> list = new ArrayList<>();
 		list.add(bean);
@@ -85,14 +84,15 @@ public class FlightController {
 		bean.setFromCityCode(bean.getFromCityName().split(",")[1]);
 		bean.setFromCityName(bean.getFromCityName().split(",")[0]);
 		
+		String id = bean.getFromCityCode()+bean.getToCityCode()+bean.getStartDate()+bean.getEndDate();
+		
+		//TODO exist check
+		
+		bean.setId(id);
+		
 		Date dt=new Date();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         
-//        bean.setQunarPrice(MAX_PRICE);
-//        bean.setCtripPrice(MAX_PRICE);
-//        bean.setFliggyPrice(MAX_PRICE);
-//        bean.setSkyPrice(MAX_PRICE);
-       
 		bean.setCreateDate(df.format(dt));
 		bean.setStatus(1);
 		
