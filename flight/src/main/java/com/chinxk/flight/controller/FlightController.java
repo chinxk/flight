@@ -4,7 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Iterator;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +20,7 @@ import com.chinxk.flight.bean.InterMessageBean;
 import com.chinxk.flight.service.InterReturnService;
 
 import io.netty.util.internal.StringUtil;
+import redis.clients.jedis.Jedis;
 
 @Controller
 public class FlightController {
@@ -31,21 +33,28 @@ public class FlightController {
 
 	@RequestMapping("/list")
 	public String list(Model model) {
-		
-		System.out.println(session.getAttribute("uid"));
-		
+
+		String uid = (String) session.getAttribute("uid");
+		System.out.println("uid:" + uid);
+
 //		String testMsg = "Id:id" + ",ToCityName:新加坡" + ",ToCityCode:SIN" + ",FromCityName:成都" + ",FromCityCode:CTU"
 //				+ ",StartDate:2018-12-15" + ",EndDate:2018-12-19" + ",MailAdd:107214108@qq.com" + ",TargetPrice:2000"
 //				+ ",QunarPrice:99" + ",FliggyPrice:98" + ",CtripPrice:97" + ",SkyPrice:96" + ",CreateDate:2018-07-27"
 //				+ ",Status:1";
 
-		String testMsg = (String)session.getAttribute("testMsg");
-		InterMessageBean bean = interReturnServiceImpl.convertFromStr(testMsg);
+		Jedis jedis = new Jedis("127.0.0.1", 6379);
+		Set<String> keys = jedis.keys(uid + "*");
+		Iterator<String> it = keys.iterator();
 		ArrayList<InterMessageBean> list = new ArrayList<>();
-		list.add(bean);
-		list.add(bean);
-		list.add(bean);
-		
+		while (it.hasNext()) {
+			String key = it.next();
+			System.out.println("key:" + key);
+			String value = jedis.get(key);
+			InterMessageBean bean = interReturnServiceImpl.convertFromStr(value);
+			list.add(bean);
+		}
+
+		jedis.close();
 		model.addAttribute("list", list);
 
 		return "list";
@@ -58,14 +67,33 @@ public class FlightController {
 
 	@RequestMapping("/login")
 	public String login(@RequestParam String mailAddress) {
-		
+
 		if (!StringUtil.isNullOrEmpty(mailAddress)) {
-			
+
 			session.setAttribute("uid", mailAddress);
 			return "redirect:/list";
-			
+
 		} else {
-			
+
+			return "err";
+		}
+	}
+
+	@RequestMapping("/detail")
+	public String detail(@RequestParam String key, Model model) {
+
+		if (!StringUtil.isNullOrEmpty(key)) {
+
+			Jedis jedis = new Jedis("127.0.0.1", 6379);
+			String value = jedis.get(key);
+			InterMessageBean bean = interReturnServiceImpl.convertFromStr(value);
+			model.addAttribute("bean", bean);
+			jedis.close();
+
+			return "detail";
+
+		} else {
+
 			return "err";
 		}
 	}
@@ -74,33 +102,35 @@ public class FlightController {
 	public String add(Model model) {
 		return "add";
 	}
-	
+
 	@RequestMapping(value = "/dealAddedInfo", method = RequestMethod.POST)
-    public String dealAddedInfo(InterMessageBean bean){
-		
-		bean.setMailAdd((String)session.getAttribute("uid"));
+	public String dealAddedInfo(InterMessageBean bean) {
+
+		String uid = (String) session.getAttribute("uid");
+		bean.setMailAdd(uid);
 		bean.setToCityCode(bean.getToCityName().split(",")[1]);
 		bean.setToCityName(bean.getToCityName().split(",")[0]);
 		bean.setFromCityCode(bean.getFromCityName().split(",")[1]);
 		bean.setFromCityName(bean.getFromCityName().split(",")[0]);
-		
-		String id = bean.getFromCityCode()+bean.getToCityCode()+bean.getStartDate()+bean.getEndDate();
-		
-		//TODO exist check
-		
-		bean.setId(id);
-		
-		Date dt=new Date();
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        
-		bean.setCreateDate(df.format(dt));
-		bean.setStatus(1);
-		
-		//TODO add to message list
-		session.setAttribute("testMsg", bean.toString());
-		
-        return "redirect:/list";
-    }
 
-}
-;
+		String id = uid + bean.getFromCityCode() + bean.getToCityCode() + bean.getStartDate() + bean.getEndDate();
+
+		// TODO exist check
+
+		bean.setId(id);
+
+		Date dt = new Date();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+		bean.setCreateDate(df.format(dt));
+		bean.setStatus("1");
+
+		Jedis jedis = new Jedis("127.0.0.1", 6379);
+		jedis.set(id, bean.toString());
+		System.out.println("redis 存储的字符串为: " + jedis.get(id));
+		jedis.close();
+
+		return "redirect:/list";
+	}
+
+};

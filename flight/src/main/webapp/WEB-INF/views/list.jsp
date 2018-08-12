@@ -44,7 +44,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${list}" var="item" varStatus="id">
-						<tr>
+						<tr onclick="window.location.href='/flight/detail?key='+'${item.id}'">
      						<td >${item.fromCityName}</td>
      						<td >${item.toCityName}</td>
      						<td >${item.startDate}</td>

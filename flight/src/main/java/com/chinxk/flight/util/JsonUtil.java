@@ -17,14 +17,8 @@ public class JsonUtil {
 			String v = a[1];
 			if (!StringUtil.isNullOrEmpty(v) && !"null".equals(v)) {
 				try {
-					if (v.matches("[0-9]*")) {
-						Method m;
-						m = c.getMethod(k, Integer.class);
-						m.invoke(obj, Integer.valueOf(v));
-					} else {
-						Method m = c.getMethod(k, String.class);
-						m.invoke(obj, v);
-					}
+					Method m = c.getMethod(k, String.class);
+					m.invoke(obj, v);
 				} catch (NoSuchMethodException e) {
 					e.printStackTrace();
 				}

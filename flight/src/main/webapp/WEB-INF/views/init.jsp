@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
 <head>
    <title>Flight</title>
    <link href="//libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
