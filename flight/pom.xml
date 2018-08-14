@@ -30,6 +30,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions><!-- 去掉默认配置 -->  
+            <exclusion>  
+                <groupId>org.springframework.boot</groupId>  
+                <artifactId>spring-boot-starter-logging</artifactId>  
+            </exclusion>  
+        </exclusions> 
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -45,8 +51,8 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-				<!-- servlet依赖. -->
+		
+		<!-- servlet依赖. -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -63,6 +69,22 @@
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
+        
+	    <dependency>
+	        <groupId>org.apache.logging.log4j</groupId>
+	        <artifactId>log4j-to-slf4j</artifactId>
+	    </dependency>
+	    
+	    <dependency>
+	       <groupId>org.slf4j</groupId>
+	       <artifactId>slf4j-nop</artifactId>
+	   </dependency>
+        
 	</dependencies>
 
 	<dependencyManagement>

@@ -22,19 +22,19 @@ public class InterMessageBean {
 	// E-mail
 	private String mailAdd;
 	// 目标价格
-	private Integer targetPrice;
+	private String targetPrice;
 	// 去哪儿价格
-	private Integer qunarPrice;
+	private String qunarPrice;
 	// 飞猪价格
-	private Integer fliggyPrice;
+	private String fliggyPrice;
 	// 携程价格
-	private Integer ctripPrice;
+	private String ctripPrice;
 	// 天巡价格
-	private Integer skyPrice;
+	private String skyPrice;
 	// 创建时间
 	private String createDate;
 	// 状态
-	private Integer status;
+	private String status;
 
 	public String getId() {
 		return id;
@@ -100,43 +100,43 @@ public class InterMessageBean {
 		this.mailAdd = mailAdd;
 	}
 
-	public Integer getTargetPrice() {
+	public String getTargetPrice() {
 		return targetPrice;
 	}
 
-	public void setTargetPrice(Integer targetPrice) {
+	public void setTargetPrice(String targetPrice) {
 		this.targetPrice = targetPrice;
 	}
 
-	public Integer getQunarPrice() {
+	public String getQunarPrice() {
 		return qunarPrice;
 	}
 
-	public void setQunarPrice(Integer qunarPrice) {
+	public void setQunarPrice(String qunarPrice) {
 		this.qunarPrice = qunarPrice;
 	}
 
-	public Integer getFliggyPrice() {
+	public String getFliggyPrice() {
 		return fliggyPrice;
 	}
 
-	public void setFliggyPrice(Integer fliggyPrice) {
+	public void setFliggyPrice(String fliggyPrice) {
 		this.fliggyPrice = fliggyPrice;
 	}
 
-	public Integer getCtripPrice() {
+	public String getCtripPrice() {
 		return ctripPrice;
 	}
 
-	public void setCtripPrice(Integer ctripPrice) {
+	public void setCtripPrice(String ctripPrice) {
 		this.ctripPrice = ctripPrice;
 	}
 
-	public Integer getSkyPrice() {
+	public String getSkyPrice() {
 		return skyPrice;
 	}
 
-	public void setSkyPrice(Integer skyPrice) {
+	public void setSkyPrice(String skyPrice) {
 		this.skyPrice = skyPrice;
 	}
 
@@ -148,20 +148,20 @@ public class InterMessageBean {
 		this.createDate = createDate;
 	}
 
-	public Integer getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
 	@Override
 	public String toString() {
 		String rStr = "";
-		for(Method m : this.getClass().getMethods()) {
-			String methodName =m.getName();
-			if(methodName.startsWith("get")&&!methodName.contains("Class")) {
+		for (Method m : this.getClass().getMethods()) {
+			String methodName = m.getName();
+			if (methodName.startsWith("get") && !methodName.contains("Class")) {
 				StringBuilder stringBuilder = new StringBuilder();
 				stringBuilder.append(methodName.replaceFirst("get", ""));
 				stringBuilder.append(":");
