@@ -3,9 +3,9 @@
 <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
 <head>
    <title>Flight</title>
-   <link href="//libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-   <script src="//libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-   <script src="//libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+   <link href="/flight/static/libs/css/bootstrap.min.css" rel="stylesheet">
+   <script src="/flight/static/libs/js/jquery-2.0.0.min.js"></script>
+   <script src="/flight/static/libs/js/bootstrap.min.js"></script>
 </head>
 <body>
 

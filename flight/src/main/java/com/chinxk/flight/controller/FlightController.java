@@ -9,8 +9,8 @@ import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,15 +32,15 @@ public class FlightController {
 
 	@Autowired
 	private HttpSession session;
+	
+	private Logger logger=LoggerFactory.getLogger(FlightController.class);
+
 
 	@RequestMapping("/list")
 	public String list(Model model) {
 
-		final Logger logger = LogManager.getLogger(FlightController.class.getName());
-		
 		String uid = (String) session.getAttribute("uid");
 		System.out.println("uid:" + uid);
-		System.out.println("user.home:" +System.getProperty("user.home"));
 		
 		logger.debug("debug:test");
 		logger.error("error");
