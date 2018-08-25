@@ -9,8 +9,8 @@ import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +33,7 @@ public class FlightController {
 	@Autowired
 	private HttpSession session;
 	
-	private Logger logger=LoggerFactory.getLogger(FlightController.class);
+	private static final Logger logger = LogManager.getLogger(FlightController.class.getName());
 
 
 	@RequestMapping("/list")
@@ -42,9 +42,10 @@ public class FlightController {
 		String uid = (String) session.getAttribute("uid");
 		System.out.println("uid:" + uid);
 		
-		logger.debug("debug:test");
-		logger.error("error");
-
+		logger.debug("debug info");
+		logger.info("test info");
+		logger.warn("warn info");
+		logger.error("error info");
 //		String testMsg = "Id:id" + ",ToCityName:新加坡" + ",ToCityCode:SIN" + ",FromCityName:成都" + ",FromCityCode:CTU"
 //				+ ",StartDate:2018-12-15" + ",EndDate:2018-12-19" + ",MailAdd:107214108@qq.com" + ",TargetPrice:2000"
 //				+ ",QunarPrice:99" + ",FliggyPrice:98" + ",CtripPrice:97" + ",SkyPrice:96" + ",CreateDate:2018-07-27"
@@ -70,6 +71,10 @@ public class FlightController {
 
 	@RequestMapping("/init")
 	public String init(Model model) {
+		logger.debug("int debug info");
+		logger.info("int test info");
+		logger.warn("int warn info");
+		logger.error("int error info");
 		return "init";
 	}
 
@@ -122,8 +127,6 @@ public class FlightController {
 		bean.setFromCityName(bean.getFromCityName().split(",")[0]);
 
 		String id = uid + bean.getFromCityCode() + bean.getToCityCode() + bean.getStartDate() + bean.getEndDate();
-
-		// TODO exist check
 
 		bean.setId(id);
 
