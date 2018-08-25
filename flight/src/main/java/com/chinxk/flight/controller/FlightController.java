@@ -32,25 +32,22 @@ public class FlightController {
 
 	@Autowired
 	private HttpSession session;
-	
-	private static final Logger logger = LogManager.getLogger(FlightController.class.getName());
 
+	private static final Logger logger = LogManager.getLogger(FlightController.class.getName());
 
 	@RequestMapping("/list")
 	public String list(Model model) {
 
+		logger.info("Function list START");
 		String uid = (String) session.getAttribute("uid");
-		System.out.println("uid:" + uid);
-		
-		logger.debug("debug info");
-		logger.info("test info");
-		logger.warn("warn info");
-		logger.error("error info");
+		logger.info("uid:" + uid);
+
 //		String testMsg = "Id:id" + ",ToCityName:新加坡" + ",ToCityCode:SIN" + ",FromCityName:成都" + ",FromCityCode:CTU"
 //				+ ",StartDate:2018-12-15" + ",EndDate:2018-12-19" + ",MailAdd:107214108@qq.com" + ",TargetPrice:2000"
 //				+ ",QunarPrice:99" + ",FliggyPrice:98" + ",CtripPrice:97" + ",SkyPrice:96" + ",CreateDate:2018-07-27"
 //				+ ",Status:1";
 
+		logger.info("search data from reris.");
 		Jedis jedis = new Jedis("127.0.0.1", 6379);
 		Set<String> keys = jedis.keys(uid + "*");
 		Iterator<String> it = keys.iterator();
@@ -62,32 +59,33 @@ public class FlightController {
 			InterMessageBean bean = interReturnServiceImpl.convertFromStr(value);
 			list.add(bean);
 		}
+		logger.info("search result size:" + list.size());
 
 		jedis.close();
 		model.addAttribute("list", list);
-
+		logger.info("Function list END");
 		return "list";
 	}
 
 	@RequestMapping("/init")
 	public String init(Model model) {
-		logger.debug("int debug info");
-		logger.info("int test info");
-		logger.warn("int warn info");
-		logger.error("int error info");
 		return "init";
 	}
 
 	@RequestMapping("/login")
 	public String login(@RequestParam String mailAddress) {
 
+		logger.info("Function login START");
+		logger.info("mailAddress:" + mailAddress);
+
 		if (!StringUtil.isNullOrEmpty(mailAddress)) {
 
 			session.setAttribute("uid", mailAddress);
+			logger.info("Function login END");
 			return "redirect:/list";
 
 		} else {
-
+			logger.error("mailAddress is empty");
 			return "err";
 		}
 	}
@@ -95,6 +93,8 @@ public class FlightController {
 	@RequestMapping("/detail")
 	public String detail(@RequestParam String key, Model model) {
 
+		logger.info("Function detail START");
+		logger.info("key:" + key);
 		if (!StringUtil.isNullOrEmpty(key)) {
 
 			Jedis jedis = new Jedis("127.0.0.1", 6379);
@@ -103,10 +103,11 @@ public class FlightController {
 			model.addAttribute("bean", bean);
 			jedis.close();
 
+			logger.info("Function detail END");
 			return "detail";
 
 		} else {
-
+			logger.error("key is empty");
 			return "err";
 		}
 	}
@@ -119,7 +120,10 @@ public class FlightController {
 	@RequestMapping(value = "/dealAddedInfo", method = RequestMethod.POST)
 	public String dealAddedInfo(InterMessageBean bean) {
 
+		logger.info("Function detail START");
 		String uid = (String) session.getAttribute("uid");
+		logger.info("uid :" + uid);
+
 		bean.setMailAdd(uid);
 		bean.setToCityCode(bean.getToCityName().split(",")[1]);
 		bean.setToCityName(bean.getToCityName().split(",")[0]);
@@ -137,10 +141,12 @@ public class FlightController {
 		bean.setStatus("1");
 
 		Jedis jedis = new Jedis("127.0.0.1", 6379);
+		logger.info("connect to redis.");
 		jedis.set(id, bean.toString());
-		System.out.println("redis 存储的字符串为: " + jedis.get(id));
+		logger.info("data saved.key:" + id + "value:" + bean.toString());
 		jedis.close();
 
+		logger.info("Function detail END");
 		return "redirect:/list";
 	}
 
